@@ -1,0 +1,37 @@
+<md-card >
+ <md-card-header>
+   <table class="full-width" cellspacing="0">
+     <tr>
+        <td><md-input-container class="full-width">
+          <input mdInput placeholder="Enter role name">
+        </md-input-container>
+        </td>
+        <td><button md-button (click)="newRole()">Search</button></td>
+        <td>
+          <button md-raised-button (click)="newRole()">New Role</button></td>
+      </tr>
+   </table>
+  
+ </md-card-header>
+ <md-card-subtitle>
+ </md-card-subtitle>
+ <md-card-content>
+   <table class="dashboard-display-table">
+    <tr>
+      <th>Role Name</th>
+      <th>Description</th>
+      <th>Number of Members</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor = "let role of roles ">
+      <td>{{role.rolename}}</td>
+      <td>{{role.description}}</td>
+      <td>{{role.numberofmembers}}</td>
+      <td><button md-button>Edit</button><button md-button>Delete</button></td>
+    </tr>
+   </table>
+ </md-card-content>
+</md-card>
+
+
+

@@ -1,0 +1,31 @@
+
+.red{
+  color:red;
+}
+.navbar-card {
+  width: 500px;
+  border-top: 10px solid #64B5F6;
+  border-radius: 0px;
+  position:relative;
+  margin-top:-90px !important;
+  margin: 0px auto;
+  display: table;
+}
+
+md-grid-tile {
+  background: #12528a;
+  position:absolute;
+}
+
+.list-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.list-radio-button {
+  margin: 5px;
+}
+
+.list-selected-value {
+  margin: 15px 0;
+}

@@ -1,0 +1,8 @@
+@import '~@angular/material/_theming';
+
+// NOTE: Theming is currently experimental and not yet publically released!
+
+
+@include mat-core();
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';

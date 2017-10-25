@@ -1,0 +1,200 @@
+---
+# cluster.yml
+
+# First task : creating the VPC.
+# We are using the variables set in the vars.yml file.
+# The module gives us back its result,
+# which contains information about our new VPC. 
+# We register it in the variable enigma_vpc_auto.
+
+- hosts: localhost
+  tasks:
+  - name: Include Vars file
+    include_vars: vars.yml
+    
+  - name:               Create VPC
+    ec2_vpc_net:
+      name:             "{{ vpc_name }}"
+      cidr_block:       "{{ vpc_cidr_block }}"
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      state:            "present"
+    register: enigma_vpc_auto
+    
+    
+  # Set VPC ID to variable 
+    
+  - name:               Set VPC ID to variable
+    set_fact:
+      vpc_id:           "{{ enigma_vpc_auto.vpc.id }}"
+    
+    
+  # Creating Subnet in the VPC.
+   
+  - name:               Create Subnet
+    ec2_vpc_subnet:
+      state:            "present"
+      vpc_id:           "{{ vpc_id }}"
+      cidr:             "{{ subnet_cidr }}"
+      az:               "{{ aws_region }}a"
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      resource_tags:
+        Name:           "Enigma VPC Subnet"
+    register: enigma_subnet_auto
+    
+    
+  # Set Subnet ID to variable
+    
+  - name:               Set Subnet ID to variable
+    set_fact:
+      subnet_id: "{{ enigma_subnet_auto.subnet.id }}"
+    
+    
+  # Creating Internet Gateway for VPC to communication with external networks.
+    
+  - name:               Create Internet Gateway for VPC
+    ec2_vpc_igw:
+      vpc_id:           "{{ vpc_id }}"
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      state:            "present"
+    register: enigma_vpc_auto_igw
+  
+    
+  # Set Internet Gateway ID to variable.
+  
+  - name:               Set Internet Gateway ID in variable
+    set_fact:
+      igw_id:           "{{ enigma_vpc_auto_igw.gateway_id }}"
+  
+    
+  # Setting up a Route Table. 
+    
+  - name:               Set up public subnet route table
+    ec2_vpc_route_table:
+      vpc_id:           "{{ vpc_id }}"
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      tags:
+        Name:           "Public"
+      subnets:
+        - "{{ subnet_id }}"
+      routes:
+        - dest:         "0.0.0.0/0"
+          gateway_id:   "{{ igw_id }}"
+  
+    
+  # Create Security Group.
+  # Basically the idea here is to allow SSH access
+  # from your IP to the EC2 resources you will 
+  # start in your VPC.
+    
+  - name:               Create Security Group
+    ec2_group:
+      name:             "Enigma Security Group"
+      description:      "Enigma Security Group"
+      vpc_id:           "{{ vpc_id }}"
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      rules:
+        - proto:        "tcp"
+          from_port:    "22"
+          to_port:      "22"
+          cidr_ip:      "{{ my_ip }}/32"
+        - proto:        "tcp"
+          from_port:    "22"
+          to_port:      "22"
+          cidr_ip:      "24.130.116.226/32"
+        - proto:        "all"
+          cidr_ip:      "{{ subnet_cidr }}"
+    register: enigma_sg_auto
+  
+  # Set Security Group ID to variable.
+    
+  - name:               Set Security Group ID to variable
+    set_fact:
+      sg_id:           "{{ enigma_sg_auto.group_id }}"
+  
+  - name : Launch Docker Swarm Master Instances
+    ec2:
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      key_name:	        "{{ aws_keypair }}"
+      instance_type:    "{{ instance_type }}" 
+      image:            "{{ ami_image }}"
+      private_ip:      "{{ item }}"
+      vpc_subnet_id:    "{{ subnet_id }}"
+      assign_public_ip: yes
+      wait:             true
+      group_id:	        "{{ sg_id }}"
+      instance_tags:
+        Name: "{{ swarm_master_name }}"
+    with_items:
+      - "10.0.0.51"
+    register: ec2_manager
+    
+  - name : Launch Docker Swarm Worker Instances
+    ec2:
+      region:           "{{ aws_region }}"
+      aws_access_key:   "{{ aws_access_key }}"
+      aws_secret_key:   "{{ aws_secret_key }}"
+      key_name:         "{{ aws_keypair }}"
+      instance_type:    "{{ instance_type }}"
+      image:            "{{ ami_image }}"
+      private_ip:       "{{item}}"
+      vpc_subnet_id:    "{{ subnet_id }}"
+      assign_public_ip: yes
+      wait:             true
+      group_id:         "{{ sg_id }}"
+      instance_tags:
+        Name: "{{ swarm_worker_name }}"
+    with_items:
+      - "10.0.0.124"
+      - "10.0.0.125"
+      - "10.0.0.126"
+    register: ec2_worker
+  
+  
+  - name: Add the newly created manager instance to host group
+    blockinfile: 
+      dest: "{{ hostpath }}"
+      regexp: "{{ item['instances'][0]['public_ip'] }}"
+      insertafter: '^\[manager\]'
+      state: present
+      block: |
+        {{ item['instances'][0]['public_ip'] }} {{hoststring}}
+      marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item['instances'][0]['public_ip'] }}"
+    with_items: "{{ ec2_manager.results }}"
+  
+  
+  - name: Add the newly created worker instance to host group
+    blockinfile:
+      dest: "{{ hostpath }}"
+      regexp: "{{ item['instances'][0]['public_ip'] }}"
+      insertafter: '^\[worker\]'
+      state: present
+      block: |
+        {{ item['instances'][0]['public_ip'] }} {{hoststring}}
+      marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item['instances'][0]['public_ip'] }}"
+    with_items: "{{ ec2_worker.results }}"
+  
+  - wait_for: path={{ hostpath }} search_regex={{hoststring}}
+  
+  
+  - name: Wait until SSH available
+    local_action:
+      module: wait_for
+      host: "{{ item['instances'][0]['public_ip'] }}"
+      port: 22
+      delay: 60
+      timeout: 600
+      state: started
+    with_items: "{{ ec2_worker.results }}"
+

@@ -1,0 +1,80 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card">
+
+    <md-card-header>
+        <h1>New Service</h1>
+    </md-card-header>
+    <md-list>
+        <md-list-item>
+            <p id="red"> <span>*</span> Required</p>
+        </md-list-item>
+    </md-list>
+
+    <md-list>
+        <md-list-item>
+            <h3>Service Name <span id="red">*</span> </h3>
+        </md-list-item>
+
+        <md-list-item>
+            <md-input-container>
+                <input mdInput placeholder="Your answer" value="" [(ngModel)]="serviceName" name="serviceName">
+            </md-input-container>
+        </md-list-item>
+
+    </md-list>
+
+    <md-list>
+        <md-list-item>
+            <h3>Subscription Plans <span id="red">*</span> </h3>
+        </md-list-item>
+
+
+    </md-list>
+
+    <md-card-content class="table-main">
+
+        <table class="mytable restable" *ngFor="let plans of newPlan;let k = index;">
+            <tr>
+
+                <th class="tablerow " class="red" (click)="removefeature(plans)"><i class="material-icons">remove</i></th>
+                <th *ngFor="let feature of plans.features; let i = index" class="tablerow">
+                    <md-input-container>
+                        <input mdInput placeholder="Feature Name" value="" [(ngModel)]="user[k].features[i].featureName" [name]="feature.featureName">
+                    </md-input-container>
+                </th>
+                <th (click)="addfeature(plans)" class="green"> <i class="material-icons">add</i> </th>
+
+            </tr>
+
+            <tr>
+                <td class="row-number-column">
+                    <md-input-container>
+                        <input mdInput placeholder="Plan Name" value="" name="planName" [(ngModel)]="user[k].planName">
+                    </md-input-container>
+                </td>
+                <td *ngFor="let fe of plans.features; let i = index">
+                    <md-input-container>
+                        <input mdInput placeholder="Feature value" value="" [(ngModel)]="user[k].features[i].featureProp" name="featureProp">
+                    </md-input-container>
+                </td>
+
+
+                <!-- <td> <button md-raised-button (click)="addfeature(plans)" type="submit">Add</button> </td>-->
+
+            </tr>
+            <tr> </tr>
+
+        </table>
+        <button md-raised-button color="primary" (click)="addplan()" type="submit" class="btn">Add Plan</button>
+
+
+    </md-card-content>
+
+    <md-card-actions class="btn">
+        <button md-raised-button color="primary" (click)="clickme(user)" type="submit">Submit</button>
+    </md-card-actions>
+</md-card>

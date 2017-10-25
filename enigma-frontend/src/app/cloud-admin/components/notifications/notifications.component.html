@@ -1,0 +1,65 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card">
+    <md-card-header>
+        <h1>Cloud Admin - Notifications</h1>
+    </md-card-header>
+
+    <md-list>
+        <md-list-item>
+            <h3>Notify me when</h3>
+        </md-list-item>
+
+    </md-list>
+    <md-card-content>
+        <table class="mytable restable">
+            <tr>
+                <th></th>
+                <th class="tablerow">Mobile</th>
+                <th class="tablerow">Email</th>
+                <th class="tablerow">SMS</th>
+            </tr>
+            <tr>
+                <td class="tabledata">A New tenant is created</td>
+                <td *ngFor="let alert of alerts;let idx = index">
+                    <md-radio-group class="radio-btn-margin" [(ngModel)]="user.tenant" name="tenant">
+                        <md-radio-button class="example-radio-button" [value]="alert.types">
+
+                        </md-radio-button>
+                    </md-radio-group>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>New Infrastructure is created</td>
+                <td *ngFor="let alert of alerts">
+                    <md-radio-group class="radio-btn-margin" [(ngModel)]="user.Infrastructure" name="Infrastructure">
+                        <md-radio-button class="example-radio-button" [value]="alert.types">
+                        </md-radio-button>
+                    </md-radio-group>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Security Alert</td>
+                <td *ngFor="let alert of alerts">
+                    <md-radio-group class="radio-btn-margin" [(ngModel)]="user.Security" name="security">
+                        <md-radio-button class="example-radio-button" [value]="alert.types">
+                        </md-radio-button>
+                    </md-radio-group>
+                </td>
+
+            </tr>
+        </table>
+    </md-card-content>
+
+    <md-card-actions class="btn">
+        <button md-raised-button color="primary" (click)="clickme(user)" type="submit">Submit</button>
+
+    </md-card-actions>
+
+</md-card>

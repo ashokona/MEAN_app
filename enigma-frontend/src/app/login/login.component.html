@@ -1,0 +1,20 @@
+<md-card class="login-card">
+  <md-card-header>
+    <md-card-title>Login</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <md-input-container class="login-full-width">
+        <input mdInput placeholder="Email" [(ngModel)]="email" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </md-input-container>
+
+    <md-input-container class="login-full-width">
+          <input mdInput placeholder="Password" [(ngModel)]="password" type="password">
+    </md-input-container>
+    <div class="rem-check">
+          <md-checkbox class="example-margin">Remember Me</md-checkbox>
+    </div>
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button class="md-primary" (click)="login()" >Login</button>
+  </md-card-actions>
+</md-card>

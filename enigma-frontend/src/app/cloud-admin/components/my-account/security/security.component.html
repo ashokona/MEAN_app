@@ -1,0 +1,35 @@
+<h3>Sessions</h3>
+<table border=1>
+<div *ngFor="let session of data.Sessions">
+ 
+<div  class="div_style"> 
+<i class="material-icons">desktop_mac</i>
+  {{session.ip}}
+  <p *ngIf="currentSession">your current session is: </p>
+  <p *ngIf="lastSession">Last accessed on {{session.signedin}}</p>
+  <i class="material-icons" (click)="collapse()">more_horiz</i>
+  <div *ngIf="show">
+  <p>{{session.browser}}</p>
+  <p>SignedIn:</p>
+  <p>{{session.signedin}}</p>
+  </div>
+  
+  <!--<p>Last accessed on {{session.signedin}}
+
+  <i class="material-icons" (click)="collapse()">more_horiz</i></p>-->
+   <button  class="revoke" *ngIf="Revoke" md-raised-button (click)="onRevoke()">Revoke</button>
+    </div>
+</div>
+
+ 
+</table>
+
+<h3>SecurityHistory</h3>
+<table border=1>
+<div *ngFor="let security of data.SecurityHistory">
+<div class="div_style">
+ {{security.ActionPerformed}} -   {{security.by}}     {{security.performedOn}}
+ </div>
+</div>
+</table>
+

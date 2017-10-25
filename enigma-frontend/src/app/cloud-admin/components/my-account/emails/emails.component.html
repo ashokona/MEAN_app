@@ -1,0 +1,75 @@
+<div>
+  <h3>Email</h3>
+  <div>
+    <md-list id="emailid">
+      <md-list-item> 
+        {{email}} <span id="primary">Primary</span><span id="public">Public</span>
+        <span id="delete"><i class="material-icons">delete</i></span>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div class="addemail">
+    <h3>Add email address</h3>
+     <md-input-container class="example-full-width">
+      <input mdInput placeholder="Enter Email address" name="email" >
+    </md-input-container>
+    <button md-button  id="add">Add</button> 
+  </div>
+  <div class="primaryEmail">
+    <h4>Primary email address</h4>
+    <p>{{email}}  will be used for account-related notifications and for web-based Enigma operations (e.g. edits and merges).</p>
+    <md-select placeholder="Email" [(ngModel)]="emails">
+      <md-option *ngFor="let emails of emailIds" [value]="email">{{ emails}}</md-option>
+    </md-select>
+    <button md-button  id="save">Save</button> 
+  </div>
+  <div class="backupEmail">
+    <h4>Backup email address</h4>
+    <p>Your backup GitHub email address can be used to reset your password if you no longer have access to your primary email address.</p>
+    <md-select placeholder="" [(ngModel)]="backup">
+      <md-option value="1">Allow all verified emails</md-option>
+      <md-option value="2">only allow primary email</md-option>
+    </md-select>
+    <button md-button  id="save">Save</button><br>
+    <p id="back">Please add a verified email, in addition to your primary email, in order to choose a backup email address.</p>
+    <div class="private">
+      <label>
+        <md-checkbox></md-checkbox>
+        Keep my email address private
+      </label><br><br><br>
+      <p id="sub">
+        We'll remove your public profile email and 
+        use <strong>@users.noreply.github.com</strong> when performing web-based Git operations and sending email on your behalf. If you want command line Git operations to use your private email you must <a href="">set your email in Git.</a>
+      </p>
+    </div>
+  </div>
+  <div >
+    <h3>Email preferences</h3>
+    <!--<label id="radio1"><md-radio-button value="1" [(ngModel)]="preferences"></md-radio-button>Receive all emails, except those I unsubscribe from.</label><br><br>
+    <p>We'll occasionally contact you with the latest news and happenings from the GitHub Universe. <a href="">Learn more.</a></p>
+  </div>
+  <div >
+    <label id="radio2"><md-radio-button value="2" [(ngModel)]="preferences"></md-radio-button>Only receive account related emails, and those I subscribe to.</label><br><br>
+    <p>We'll only send you legal or administrative emails, and any emails you’ve specifically subscribed to.
+Save email preferences</p>
+  </div>
+  <button md-button  id="add" [disabled]="true">Save email preferences</button>
+  <p> Looking for activity notification controls? Check the <a href="">Notification center</a></p>
+</div>{{preferences}}-->
+
+<md-radio-group class="example-radio-group" [(ngModel)]="preferences" name="preferences">
+  <label id="radio1"><md-radio-button class="example-radio-button" [value]=1>
+    Receive all emails, except those I unsubscribe from.
+  </md-radio-button>
+  </label><br><br>
+  <p>We'll occasionally contact you with the latest news and happenings from the GitHub Universe. <a href="">Learn more.</a></p>
+  <label id="radio2"><md-radio-button class="example-radio-button" [value]=2>
+    Only receive account related emails, and those I subscribe to.
+  </md-radio-button>
+  Only receive account related emails, and those I subscribe to.</label><br><br>
+  <p>We'll only send you legal or administrative emails, and any emails you’ve specifically subscribed to.
+Save email preferences</p>
+</md-radio-group>
+<button md-button  id="add" [disabled]="preferences == '1'? true: false">Save email preferences</button>
+  <p> Looking for activity notification controls? Check the <a href="">Notification center</a></p>
+  </div>

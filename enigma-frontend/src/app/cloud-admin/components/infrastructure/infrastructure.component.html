@@ -1,0 +1,52 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+<md-card class="dashboard-card">
+    <md-card-header>
+        <h1>Cloud</h1>
+    </md-card-header>
+    <md-list>
+        <md-list-item>
+            <p class="danger">* Required </p>
+        </md-list-item>
+        <md-list-item>
+            <h2 class="example-h2">Services <span class="danger">*</span></h2>
+        </md-list-item>
+    </md-list>
+    <md-card-content *ngIf="count == 0 ">
+
+
+        <md-radio-group class="list-radio-group" [(ngModel)]="selectedServices">
+            <md-radio-button class="list-radio-button" *ngFor="let service of services" [value]="service">
+                {{service}}
+            </md-radio-button>
+        </md-radio-group>
+    </md-card-content>
+    <md-card-content *ngIf="count == 1">
+        <p class="red">* Required </p>
+        <h2 class="example-h2">Orchestration System <span class="danger">*</span></h2>
+        <md-radio-group class="list-radio-group" [(ngModel)]="orchestrationSystem">
+            <md-radio-button class="list-radio-button" *ngFor="let system of systems" [value]="system">
+                {{system}}
+            </md-radio-button>
+        </md-radio-group>
+    </md-card-content>
+    <md-card-content *ngIf="count == 2 ">
+        <p class="red">* Required </p>
+        <h2 class="example-h2">Orchestration System <span class="danger">*</span></h2>
+        <md-radio-group class="list-radio-group" [(ngModel)]="orchestrationSystemOptions">
+            <md-radio-button class="list-radio-button" *ngFor="let systemOption of systemOptions" [value]="systemOption">
+                {{systemOption}}
+            </md-radio-button>
+        </md-radio-group>
+    </md-card-content>
+
+
+    <md-card-actions class="btn">
+        <button md-raised-button *ngIf="count == 1 || count == 2" (click)="onBack()">Back</button>
+        <button md-raised-button *ngIf="count == 0 || count == 1" (click)="onNext()">Next</button>
+        <button md-raised-button *ngIf="count == 2" color="primary" (click)="onSubmit()">Submit</button>
+    </md-card-actions>
+
+</md-card>

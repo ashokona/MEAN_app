@@ -1,0 +1,34 @@
+<md-toolbar>
+  <i class="material-icons" (click)="sidenav.toggle()">menu</i>
+  <h3>Enigma</h3>
+  <div class="header-right">
+        <md-input-container class="login-full-width">
+          <i class="material-icons" md-prefix>search</i>
+          <input mdInput placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </md-input-container>
+      <span class="icons"> 
+        <i class="material-icons">settings_applications</i>
+        <i class="material-icons" [mdMenuTriggerFor]="menu">perm_identity</i>
+          <md-menu #menu="mdMenu">
+          <button md-menu-item>
+            <md-icon>perm_identity</md-icon>
+            <span>Profile</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>group</md-icon>
+            <span>Groups</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>settings</md-icon>
+            <span>Settings</span>
+          </button>
+          <button md-menu-item (click)="logout()">
+            <md-icon>close</md-icon>
+            <span>Logout</span>
+          </button>
+        </md-menu>
+      </span>
+      
+      
+  </div>
+</md-toolbar>

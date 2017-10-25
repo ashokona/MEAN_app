@@ -1,0 +1,35 @@
+
+  <md-grid-list   cols="1" rowHeight="200px">
+  <md-grid-tile class="dashboard-background"></md-grid-tile>
+
+</md-grid-list>
+<md-card class="dashboard-card">
+<md-list>
+  <md-list-item>
+<h1>Site Level Workflow</h1>
+  </md-list-item>
+   <md-list-item>
+<h3> Site Admin Rights Creation </h3>
+  </md-list-item>
+  
+     <md-card-content>
+     <md-list-item>
+       <md-radio-group [(ngModel)]="tenant.site" name="site">
+  <md-radio-button value="site admins" class="radio-button"  >  Site Admins cannot create other site admins</md-radio-button>
+  <md-radio-button value="site admins with Tenant" class="radio-button" >  Site Admins cannot create other site admins with Tenant Admin Approval</md-radio-button>
+</md-radio-group>
+     </md-list-item>
+    </md-card-content>
+
+       <md-card-actions>
+        <md-list-item>
+
+          <button md-raised-button class="button-bt"  (click)="onSubmit(tenant)">Submit</button>
+
+        </md-list-item>
+        </md-card-actions>
+
+
+</md-list>
+</md-card>
+

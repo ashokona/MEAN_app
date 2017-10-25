@@ -1,0 +1,93 @@
+<md-grid-list cols="1" rowHeight="200px">
+    <md-grid-tile class="dashboard-background"></md-grid-tile>
+</md-grid-list>
+
+
+<md-card class="dashboard-card ">
+    <md-card-header>
+        <h1>New User</h1>
+    </md-card-header>
+    <form name="myForm" novalidate>
+
+        <md-list>
+            <md-list-item>
+                <h3>Add users</h3>
+            </md-list-item>
+
+        </md-list>
+        <md-card-content>
+            <md-list>
+                <md-list-item>
+                    <h4>You can add users to Your account.</h4>
+                </md-list-item>
+
+            </md-list>
+            <ul>
+                <li>User will eceive an email to active (for new users) or accept (for existing users).</li>
+                <li>Corp users type is only available when Meeting Connector is enabled.</li>
+
+                <li>User is listned in Pending tab prior to activation or acceptance.</li>
+
+            </ul>
+
+            <md-list>
+                <md-list-item>
+                    <span>User Type:&nbsp;</span>
+                    <md-radio-group [(ngModel)]="user.uType" name="usertype">
+                        <md-radio-button value="Basic">Basic</md-radio-button>
+                        <md-radio-button value="pro"> Pro</md-radio-button>
+                        <md-radio-button value="corp">Corp</md-radio-button>
+
+                    </md-radio-group>
+                </md-list-item>
+
+            </md-list>
+
+
+            <md-list>
+                <md-list-item>
+                    <span>Department:&nbsp;&nbsp;</span>
+                    <md-input-container class="full-width">
+                        <input mdInput placeholder="" [(ngModel)]="user.department" name="department">
+                    </md-input-container>
+                </md-list-item>
+
+            </md-list>
+
+            <md-list>
+                <md-list-item>
+                    <span>User Group:&nbsp;&nbsp;</span>
+                    <md-select class="full-width" [(ngModel)]="user.uGroup" name="group">
+                        <md-option *ngFor="let group of groups" [value]="group.value">
+                            {{group.viewValue}}
+                        </md-option>
+                    </md-select>
+                </md-list-item>
+
+            </md-list>
+            <md-list>
+                <md-list-item>
+                    <span>Emails:&nbsp;&nbsp;</span>
+                    <md-input-container class="full-width">
+                        <textarea mdInput placeholder="" [(ngModel)]="user.emails" name="emails"></textarea>
+                    </md-input-container>
+                </md-list-item>
+
+            </md-list>
+
+            <md-list>
+                <md-list-item>
+                    <p>Use comma to separate multiple email addresses.</p>
+                </md-list-item>
+
+            </md-list>
+        </md-card-content>
+
+        <md-card-actions class="btn">
+            <button md-raised-button color="primary" (click)="add(user)" type="submit">Add</button>
+            <button md-raised-button color="primary" (click)="cancel()" type="submit">Cancel</button>
+
+        </md-card-actions>
+    </form>
+
+</md-card>

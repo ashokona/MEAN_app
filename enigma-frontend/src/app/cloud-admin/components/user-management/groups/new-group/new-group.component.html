@@ -1,0 +1,12 @@
+<div> 
+  <h4>Add Group</h4>
+  <form>
+    <label>Group Name</label>
+    <md-input-container class="example-full-width">
+      <input mdInput placeholder="Enter group name" name="groupname" [(ngModel)]="data.groupname" >
+    </md-input-container><br> 
+    <button md-button color="primary" id="add" (click)="add(data)">Add</button> 
+    <button md-button id="cancel" (click)="cancel()">Cancel</button>
+  </form>
+</div>
+

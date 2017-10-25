@@ -1,0 +1,10 @@
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+   enigma: # name of the first service
+    build: enigma-api   # specify the directory of the Dockerfile
+    ports:
+      - "8000:8000" # specify port forewarding
+    volumes:
+      - ~/.ssh/enigma-secret:/root/.ssh

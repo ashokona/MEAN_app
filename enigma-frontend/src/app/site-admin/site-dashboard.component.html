@@ -1,0 +1,51 @@
+<md-toolbar>
+  <i class="material-icons" (click)="sidenav.toggle()">menu</i>
+  <h3>Enigma</h3>
+  <div class="header-right">
+        <md-input-container class="login-full-width">
+          <i class="material-icons" md-prefix>search</i>
+          <input mdInput placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </md-input-container>
+      <span class="icons"> 
+        <i class="material-icons">settings_applications</i>
+        <i class="material-icons" [mdMenuTriggerFor]="menu">perm_identity</i>
+          <md-menu #menu="mdMenu">
+          <button md-menu-item>
+            <md-icon>perm_identity</md-icon>
+            <span>Profile</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>group</md-icon>
+            <span>Groups</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>settings</md-icon>
+            <span>Settings</span>
+          </button>
+          <button md-menu-item (click)="logout()">
+            <md-icon>close</md-icon>
+            <span>Logout</span>
+          </button>
+        </md-menu>
+      </span>
+      
+      
+  </div>
+</md-toolbar>
+<md-sidenav-container class="dashboard-container">
+  <md-sidenav #sidenav mode="side" class="dashboard-sidenav" opened="true">
+      <md-list class="side-menu">
+        <md-list-item routerLink='home'><i class="material-icons">account_circle</i> Home</md-list-item>
+        <md-list-item routerLink='networking'><i class="material-icons">view_list</i>Networking</md-list-item>
+        <md-list-item routerLink='devops'><i class="material-icons">account_balance</i>DevOps</md-list-item>
+        <md-list-item routerLink='sla'><i class="material-icons">account_balance</i>SLA</md-list-item>        
+      </md-list>
+  </md-sidenav>
+
+  <div class="dashboard-sidenav-content">
+      <!--<app-infrastructure></app-infrastructure>-->
+      <!--<app-product-catalog></app-product-catalog>-->
+      <router-outlet></router-outlet>
+  </div>
+
+</md-sidenav-container>

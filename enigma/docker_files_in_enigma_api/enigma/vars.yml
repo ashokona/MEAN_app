@@ -1,0 +1,26 @@
+---
+
+# AWS Credentials
+aws_access_key: "AKIAJRMKIPSIH74TDZAA"
+aws_secret_key: "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"
+aws_keypair:    "enigma-portal"
+aws_region:     "ap-southeast-1"
+
+# VPC Information
+vpc_name:       "EnigmaVPCAuto"
+vpc_cidr_block: "10.0.0.0/23"
+
+# For Security Group Rule
+my_ip:          "13.58.7.253"
+
+# Subnets
+subnet_cidr:  "10.0.0.0/24"
+
+# VM details
+ami_image: "ami-cae0da98"
+instance_type: "t1.micro"
+swarm_master_name: "enigmaSwarmMaster"
+swarm_worker_name: "enigmaSwarmWorker"
+
+hostpath: "/etc/ansible/hosts"
+hoststring: "ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/root/.ssh/p.pem"

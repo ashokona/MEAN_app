@@ -1,0 +1,61 @@
+.example-margin {
+    display: table;
+    margin: 0px auto;
+}
+
+th.tablerow {
+    min-width: 120px;
+}
+
+.mytable {
+    padding: 0 12px;
+}
+
+.btn {
+    margin: 14px;
+    margin-top: 55px;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+.restable tr td,
+.restable th {
+    padding: 10px 16px;
+    min-width: 45px;
+}
+
+#red {
+    color: red;
+}
+
+.newservice {
+    float: right;
+    cursor: pointer;
+}
+
+.table-main {
+    max-width: 600px;
+    overflow-x: auto;
+}
+
+.table-main .restable tr td {
+    min-width: 80px !important;
+    max-width: 100px !important;
+}
+
+.green {
+    color: green;
+    cursor: pointer;
+}
+
+.red {
+    color: red;
+    cursor: pointer;
+}
+
+
+/*.mytable1 {
+    margin: auto;
+}*/

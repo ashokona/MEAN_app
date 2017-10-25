@@ -1,0 +1,10 @@
+.button{
+    margin-top: 59px;
+    padding-right: 22px;
+}
+.notifications-table { padding-top: 20px;}
+.notification-btn { margin: 70px 0px 0px 15px !important;}
+.notifications-table th { border: 0px; font-weight: normal;}
+.notifications-row { background: #eaeaea;}
+.notifications-row td { padding: 5px 10px;} 
+.notifications-row td .radio-btn-margin { margin: 0px auto; display: table; padding-left: 8px;}

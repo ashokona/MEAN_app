@@ -1,0 +1,26 @@
+.mat-figure {
+    background: rgb(103, 58, 183);
+}
+
+.navbar-card {
+    width: 600px;
+    border-top: 10px solid rgb(179, 136, 255);
+    border-radius: 0px;
+    position: relative;
+    margin-top: -90px !important;
+    margin: 0px auto;
+    display: table;
+}
+
+.example-full-width {
+    width: 82%;
+}
+
+.example-full-width1 {
+    width: 100%;
+}
+
+.btn {
+    margin: 14px;
+    margin-top: 55px;
+}

@@ -1,0 +1,38 @@
+<md-card >
+ <md-card-header>
+   <table class="full-width" cellspacing="0">
+     <tr>
+        <td><md-input-container class="full-width">
+          <input mdInput #myInput placeholder="Search by username, first name, last name, tenant name" (input)="filterItem(myInput.value)" [(ngModel)]="name" >
+        </md-input-container>
+        </td>
+        <td><button md-button (click)="newUser()">Search</button></td>
+        <td>
+          <button md-raised-button (click)="newUser()">New User</button></td>
+      </tr>
+   </table>
+  
+ </md-card-header>
+ <md-card-subtitle>
+ </md-card-subtitle>
+ <md-card-content>
+   <table class="dashboard-display-table">
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Created On</th>
+      <th>UserName</th>
+      <th>Status</th>
+      <th>Edit</th>
+    </tr>
+    <tr *ngFor = "let user of filteredItems ">
+      <td>{{user.email}}</td>
+      <td>{{user.role}}</td>
+      <td>{{users.createdAt}}</td>
+      <td>{{user.username}}</td>
+      <td>active</td>
+      <td><button md-button>Edit</button></td>
+    </tr>
+   </table>
+ </md-card-content>
+</md-card>

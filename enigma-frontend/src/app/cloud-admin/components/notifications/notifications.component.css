@@ -1,0 +1,27 @@
+
+.radio-btn-margin {
+    display: table;
+    margin: 0px auto;
+}
+
+th.tablerow {
+    min-width: 120px;
+}
+
+.mytable {
+    padding: 0 12px;
+}
+
+.btn {
+    margin: 14px;
+    margin-top: 55px;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+.restable tr td,
+.restable th {
+    padding: 10px 0px;
+}

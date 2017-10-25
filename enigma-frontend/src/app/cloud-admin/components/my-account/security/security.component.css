@@ -1,0 +1,20 @@
+.div_style{
+    border: 1px solid #c0c3bd;
+    padding: 0 17px;
+    padding-top: 10px;
+    padding-bottom: 1px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    width: 500px;
+   padding-top: 18px;
+    padding-bottom: 18px;
+   
+}
+.revoke{
+     float: right;
+    margin-top: -42px;
+
+}
+.material-icons{
+ cursor: pointer;
+}

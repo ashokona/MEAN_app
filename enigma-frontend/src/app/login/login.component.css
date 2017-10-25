@@ -1,0 +1,33 @@
+.login-card .login-full-width{
+    width: 95%;
+    margin-left: 10px;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+.login-card {
+    width: 450px;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+}
+.login-card .mat-card-title {
+    font-size: 17px;
+}
+.mat-card-header{
+    margin-bottom: 26px;
+    border-bottom: 1px solid #65aeec;
+}
+.rem-check {
+    margin-left: 11px;
+}
+.mat-card-actions{
+    margin-bottom: 0px !important;
+    padding-bottom: 0 !important;
+    text-align: center;
+    padding-top: 10px !important;
+}
+[md-raised-button].md-primary, [md-fab].md-primary, [md-mini-fab].md-primary {
+    background-color: #3f5bbb;
+    color: #fffcfc;
+}

@@ -1,0 +1,60 @@
+<div *ngIf="submitopen">
+<md-grid-list   cols="1" rowHeight="200px">
+  <md-grid-tile class="dashboard-background"></md-grid-tile>
+
+</md-grid-list>
+<md-card class="dashboard-card">
+<md-list>
+  <md-list-item>
+<h1> Tenant Admin Notifications </h1>
+  </md-list-item>
+   <md-list-item>
+<h3> Billing </h3>
+  </md-list-item>
+  
+     <md-card-content>
+     <md-list-item>
+       <table class="notifications-table">
+         <tr>
+           <th></th>
+           <th>Email</th>
+           <th>Mobile</th>
+           <th>SMS</th>
+           <th>None</th>
+           </tr>
+           <tr class="notifications-row">
+             <td >Exceeds $X</td>
+            <td *ngFor="let alert of alerts">
+                    <md-radio-group class="example-radio-group" [(ngModel)]="user.Exceeds" name="Exceeds">
+                        <md-radio-button class="example-radio-button" [value]="alert.types">
+
+                        </md-radio-button>
+                    </md-radio-group>
+                </td>
+           
+           </tr>
+         </table>
+     </md-list-item>
+    </md-card-content>
+
+       <md-card-actions>
+        <md-list-item>
+
+          <button class="button notification-btn" (click)="onSubmit(user)" md-raised-button	>Submit</button>
+
+        </md-list-item>
+        </md-card-actions>
+
+
+</md-list>
+</md-card>
+
+
+</div>
+
+
+
+
+
+
+

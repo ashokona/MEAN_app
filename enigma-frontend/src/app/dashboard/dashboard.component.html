@@ -1,0 +1,71 @@
+<md-toolbar>
+  <i class="material-icons" (click)="sidenav.toggle()">menu</i>
+  <h3>Enigma</h3>
+  <div class="header-right">
+        <md-input-container class="login-full-width">
+          <i class="material-icons" md-prefix>search</i>
+          <input mdInput placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </md-input-container>
+      <span class="icons"> 
+        <i class="material-icons">settings_applications</i>
+        <i class="material-icons" [mdMenuTriggerFor]="menu">perm_identity</i>
+          <md-menu #menu="mdMenu">
+          <button md-menu-item>
+            <md-icon>perm_identity</md-icon>
+            <span>Profile</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>group</md-icon>
+            <span>Groups</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>settings</md-icon>
+            <span>Settings</span>
+          </button>
+          <button md-menu-item (click)="logout()">
+            <md-icon>close</md-icon>
+            <span>Logout</span>
+          </button>
+        </md-menu>
+      </span>
+      
+      
+  </div>
+</md-toolbar>
+<md-sidenav-container class="dashboard-container">
+  <md-sidenav #sidenav mode="side" class="dashboard-sidenav" opened="true">
+      <md-list class="side-menu">
+        <md-list-item><i class="material-icons">account_circle</i> Resellers</md-list-item>
+        <md-list-item><i class="material-icons">account_balance</i> Infrastructure</md-list-item>
+        <md-list-item><i class="material-icons">view_list</i>App</md-list-item>
+        <md-list-item><i class="material-icons">verified_user</i>Security</md-list-item>
+        <md-list-item><i class="material-icons">visibility</i>Monitoring</md-list-item>
+        <md-list-item><i class="material-icons">assignment</i>Logging</md-list-item>
+        <md-list-item><i class="material-icons">settings</i>Integrations</md-list-item>
+        <md-list-item><i class="material-icons">trending_up</i>Analytics</md-list-item>
+        <md-list-item><i class="material-icons">receipt</i>Audit</md-list-item>
+        <md-list-item><i class="material-icons">announcement</i>Notifications</md-list-item>
+      </md-list>
+  </md-sidenav>
+
+  <div class="dashboard-sidenav-content">
+              <md-card>
+                  <md-card-actions>
+                    <button md-raised-button class="md-primary" (click)="trigger()" >Launch Cluster</button>
+                  </md-card-actions>
+
+                <label *ngIf="progress">
+                  <md-progress-bar
+                      class="app-progress"
+                      mode="indeterminate"
+                      aria-label="Determinate progress-bar example"></md-progress-bar>
+                </label>
+
+              </md-card>
+
+              <md-card>
+                {{serverConsoleLogs}}
+              </md-card>
+  </div>
+
+</md-sidenav-container>

@@ -1,0 +1,94 @@
+<md-toolbar>
+  <i class="material-icons" (click)="sidenav.toggle()">menu</i>
+  <h3>Enigma</h3>
+  <div class="header-right">
+        <md-input-container class="login-full-width">
+          <i class="material-icons" md-prefix>search</i>
+          <input mdInput placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      </md-input-container>
+      <span class="icons"> 
+        <i class="material-icons">settings_applications</i>
+        <i class="material-icons" [mdMenuTriggerFor]="menu">perm_identity</i>
+          <md-menu #menu="mdMenu">
+          <button md-menu-item>
+            <md-icon>perm_identity</md-icon>
+            <span>Profile</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>group</md-icon>
+            <span>Groups</span>
+          </button>
+          <button md-menu-item disabled>
+            <md-icon>settings</md-icon>
+            <span>Settings</span>
+          </button>
+          <button md-menu-item (click)="logout()">
+            <md-icon>close</md-icon>
+            <span>Logout</span>
+          </button>
+        </md-menu>
+      </span>
+      
+      
+  </div>
+</md-toolbar>
+<md-sidenav-container class="dashboard-container">
+  <md-sidenav #sidenav mode="side" class="dashboard-sidenav" opened="true">
+      <md-list class="side-menu">
+        <md-list-item class="active"><i class="material-icons">account_circle</i> Resellers</md-list-item>
+        <md-list-item><i class="material-icons">account_balance</i> Infrastructure</md-list-item>
+        <md-list-item><i class="material-icons">view_list</i>App</md-list-item>
+        <md-list-item><i class="material-icons">verified_user</i>Security</md-list-item>
+        <md-list-item><i class="material-icons">visibility</i>Monitoring</md-list-item>
+        <md-list-item><i class="material-icons">assignment</i>Logging</md-list-item>
+        <md-list-item><i class="material-icons">settings</i>Integrations</md-list-item>
+        <md-list-item><i class="material-icons">trending_up</i>Analytics</md-list-item>
+        <md-list-item><i class="material-icons">receipt</i>Audit</md-list-item>
+        <md-list-item><i class="material-icons">announcement</i>Notifications</md-list-item>
+      </md-list>
+  </md-sidenav>
+
+  <div class="dashboard-sidenav-content">
+              <md-card>
+
+<h1>Resellers</h1>
+
+ <button md-raised-button (click)="openDialog()">New Reseller</button>
+              </md-card>
+
+<md-card > 
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">
+      </th>
+      <th>First Name</th>
+      <th>Middle Name</th>
+      <th>Last Name</th>
+      <th>Mobile Number</th>
+      <th>Email</th>
+      <th>Organisation</th>
+      <th>Last Seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of records">
+      <td class="mdl-data-table__cell--non-numeric">
+        <md-checkbox></md-checkbox>
+      </td>
+      <td>{{ data.firstName }}</td>
+      <td>{{ data.middleName }}</td>
+      <td>{{ data.lastName }}</td>
+      <td>{{ data.mobileNumber }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.organisation }}</td>
+      <td>{{ data.lastSeen }}</td>
+    </tr>
+
+  </tbody>
+</table>
+</md-card>
+
+  </div>
+
+</md-sidenav-container>
